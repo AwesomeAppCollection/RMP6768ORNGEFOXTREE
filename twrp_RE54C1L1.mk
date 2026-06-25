@@ -10,7 +10,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Inherit some common Omni stuff.
-$(call inherit-product, vendor/omni/config/common.mk)
+#$(call inherit-product, vendor//config/common.mk)
 
 # Inherit from RE54C1L1 device
 $(call inherit-product, device/realme/RE54C1L1/device.mk)
