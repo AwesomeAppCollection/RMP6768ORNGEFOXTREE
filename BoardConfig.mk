@@ -109,3 +109,40 @@ TW_USE_TOOLBOX := true
 TARGET_RECOVERY_DEVICE_MODULES := init.recovery.mt6768.rc
 # OrangeFox/TWRP Screen Brightness
 TW_MAX_BRIGHTNESS := 2047
+# ==============================================================================
+# Dedicated Partition Framework Configuration
+# ==============================================================================
+TW_THEME := portrait_hdpi
+TW_EXTRA_LANGUAGES := true
+TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_USE_TOOLBOX := true
+TARGET_RECOVERY_DEVICE_MODULES := init.recovery.mt6768.rc
+
+# 1. STANDALONE RECOVERY PARTITION ROUTING (Not Recovery-As-Boot)
+BOARD_SUPPORTS_RECOVERY_AS_BOOT := false
+BOARD_USES_RECOVERY_AS_BOOT := false
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+
+# 2. FIXED DISPLAY POWER OVERRIDE
+# Prevents the framework code from triggering a panel power cutoff on boot.
+TW_SCREEN_BLANK_ON_BOOT := false
+TW_NO_SCREEN_BLANK := true
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
+
+# 3. KERNEL FRAMEBUFFER TARGET (Derived from your system log)
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
+RECOVERY_GRAPHICS_USE_LINUX_FBDEV := true
+
+# 4. HARDWARE PANEL BRIGHTNESS MAPPING
+TW_BRIGHTNESS_PATH := "/sys/devices/platform/11004000.i2c7/i2c-7/7-0036/backlight/sgm_bl/brightness"
+TW_MAX_BRIGHTNESS := 2047
+TW_DEFAULT_BRIGHTNESS := 1200
+
+# 5. DYNAMIC PARTITION INITIALIZATION LOOPS
+# Ensures early init triggers the dynamic system architecture layout.
+MAIN_PARTITION_LIST := system vendor product
+BOARD_HAS_LARGE_FILESYSTEM := true
+
+# 6. USB CONNECTION PATHS
+TW_EXCLUDE_DEFAULT_USB_INIT := false
+
