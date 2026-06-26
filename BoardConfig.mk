@@ -107,3 +107,5 @@ TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TARGET_RECOVERY_DEVICE_MODULES := init.recovery.mt6768.rc
+# OrangeFox/TWRP Screen Brightness
+TW_MAX_BRIGHTNESS := 2047
