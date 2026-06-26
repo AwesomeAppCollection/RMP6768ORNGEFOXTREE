@@ -10,6 +10,9 @@ DEVICE_PATH := device/realme/RE54C1L1
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
 
+# Bypasses shared system package checks during compilation
+TARGET_RECOVERY_LINK_SHARED_LIBS_FROM_RECOVERY_ALLOWED := true
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -111,9 +114,6 @@ TW_USE_TOOLBOX := true
 
 # Include early MediaTek initialization scripts
 TARGET_RECOVERY_DEVICE_MODULES := init.recovery.mt6768.rc
-
-# Include low-level storage partition mapping modules
-TARGET_RECOVERY_DEVICE_MODULES += libdm e2fsck mke2fs tune2fs
 
 # 1. STANDALONE RECOVERY PARTITION CONFIGURATION (Not Recovery-As-Boot)
 BOARD_SUPPORTS_RECOVERY_AS_BOOT := false
