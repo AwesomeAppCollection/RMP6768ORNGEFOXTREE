@@ -78,6 +78,10 @@ BOARD_SUPER_PARTITION_SIZE := 9126805504 # TODO: Fix hardcoded value
 BOARD_SUPER_PARTITION_GROUPS := realme_dynamic_partitions
 BOARD_REALME_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor product
 BOARD_REALME_DYNAMIC_PARTITIONS_SIZE := 9122611200 # TODO: Fix hardcoded value
+# Built-in framework compilation flags
+TARGET_USES_MKE2FS := true
+TW_USE_TOOLBOX := true
+
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6768
