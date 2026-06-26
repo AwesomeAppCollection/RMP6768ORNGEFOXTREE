@@ -3,13 +3,13 @@
 # ==============================================================================
 
 # Logical / Dynamic Partitions (Super Pool)
-/system         ext4    system       display="System";logical
-/vendor         ext4    vendor       display="Vendor";logical
-/product        ext4    product      display="Product";logical
+/system         ext4    /dev/block/mapper/system       display="System";logical
+/vendor         ext4    /dev/block/mapper/vendor       display="Vendor";logical
+/product        ext4    /dev/block/mapper/product      display="Product";logical
 
 # Standard Core Filesystems
 /metadata       ext4    /dev/block/platform/bootdevice/by-name/md_udc      display="Metadata"
-/data           ext4    /dev/block/platform/bootdevice/by-name/userdata    display="Data";fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keymaster
+/data           ext4    /dev/block/platform/bootdevice/by-name/userdata    display="Data";fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keymaster;encryptable=footer;length=-16384
 /cache          ext4    /dev/block/platform/bootdevice/by-name/cache       display="Cache"
 
 # Storage & Removable Devices (Fixed SD Card & OTG)
