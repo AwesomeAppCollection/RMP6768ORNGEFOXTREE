@@ -16,7 +16,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/realme/RE54C1L1/device.mk)
 
 PRODUCT_DEVICE := RE54C1L1
-PRODUCT_NAME := omni_RE54C1L1
+PRODUCT_NAME := twrp_RE54C1L1
 PRODUCT_BRAND := realme
 PRODUCT_MODEL := RMP2103
 PRODUCT_MANUFACTURER := realme
