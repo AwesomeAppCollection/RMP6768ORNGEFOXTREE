@@ -106,7 +106,7 @@ PLATFORM_VERSION := 16.1.0
 # ==============================================================================
 # Basic UI & Language Layout Parameters
 TW_THEME := portrait_hdpi
-TW_EXTRA_LANGUAGES := true
+TW_EXTRA_LANGUAGES := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 
@@ -150,7 +150,7 @@ RECOVERY_SDCARD_ON_DATA := true
 # 8. ZIP INSTALLER AND FLASH TOOL ENGINE
 TARGET_USES_MKE2FS := true
 TW_INCLUDE_RESETPROP := true
-TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_REPACKTOOLS := false
 TW_SKIP_COMPATIBILITY_CHECK := true
 TARGET_OTA_ASSERT_DEVICE := RMP2102,RMP2103,RMP6768,RE54C1L1
 
