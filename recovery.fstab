@@ -2,10 +2,10 @@
 # OrangeFox / TWRP Unified fstab for Realme Pad (MT6768)
 # ==============================================================================
 
-# Logical / Dynamic Partitions (Super Pool)
-/system         ext4    /dev/block/mapper/system       display="System";logical
-/vendor         ext4    /dev/block/mapper/vendor       display="Vendor";logical
-/product        ext4    /dev/block/mapper/product      display="Product";logical
+# Logical / Dynamic Partitions (Super Pool - Aligned to 'main' Grouping)
+/system         ext4    system       display="System";logical
+/vendor         ext4    vendor       display="Vendor";logical
+/product        ext4    product      display="Product";logical
 
 # Standard Core Filesystems
 /metadata       ext4    /dev/block/platform/bootdevice/by-name/md_udc      display="Metadata"
