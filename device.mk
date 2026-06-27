@@ -15,5 +15,4 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service \
     libdm \
-    dtc \
     checkpoint_gc
