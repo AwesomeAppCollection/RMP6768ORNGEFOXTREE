@@ -101,49 +101,66 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
-# TWRP Configuration
-TW_THEME := portrait_hdpi
-TW_EXTRA_LANGUAGES := true
-TW_SCREEN_BLANK_ON_BOOT := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_USE_TOOLBOX := true
-TARGET_RECOVERY_DEVICE_MODULES := init.recovery.mt6768.rc
-# OrangeFox/TWRP Screen Brightness
-TW_MAX_BRIGHTNESS := 2047
 # ==============================================================================
-# Dedicated Partition Framework Configuration
+# OrangeFox / TWRP Unified Framework Configuration
 # ==============================================================================
+# Basic UI & Language Layout Parameters
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
+
+# Include early MediaTek initialization scripts
 TARGET_RECOVERY_DEVICE_MODULES := init.recovery.mt6768.rc
 
-# 1. STANDALONE RECOVERY PARTITION ROUTING (Not Recovery-As-Boot)
+# 1. STANDALONE RECOVERY PARTITION CONFIGURATION (A-Only Single Slot Layout)
 BOARD_SUPPORTS_RECOVERY_AS_BOOT := false
 BOARD_USES_RECOVERY_AS_BOOT := false
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+AB_OTA_UPDATER := false
 
-# 2. FIXED DISPLAY POWER OVERRIDE
-# Prevents the framework code from triggering a panel power cutoff on boot.
+# 2. FIXED DISPLAY AND CORE BACKLIGHT POWER OVERRIDES
 TW_SCREEN_BLANK_ON_BOOT := false
 TW_NO_SCREEN_BLANK := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
-# 3. KERNEL FRAMEBUFFER TARGET (Derived from your system log)
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
+# 3. KERNEL FRAMEBUFFER GRAPHICS (Matches Working Tree Specifications)
+TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 RECOVERY_GRAPHICS_USE_LINUX_FBDEV := true
 
-# 4. HARDWARE PANEL BRIGHTNESS MAPPING
+# 4. HARDWARE PANEL BRIGHTNESS MAPPING PATHS (From your system log)
 TW_BRIGHTNESS_PATH := "/sys/devices/platform/11004000.i2c7/i2c-7/7-0036/backlight/sgm_bl/brightness"
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
 
-# 5. DYNAMIC PARTITION INITIALIZATION LOOPS
-# Ensures early init triggers the dynamic system architecture layout.
-MAIN_PARTITION_LIST := system vendor product
+# 5. DYNAMIC PARTITION INITIALIZATION LOOPS (Matched to Working Tree)
+MAIN_PARTITION_LIST := system product vendor
 BOARD_HAS_LARGE_FILESYSTEM := true
+TW_INCLUDE_LPDUMP := true
 
-# 6. USB CONNECTION PATHS
+# 6. CRITICAL MEDIA-TEK DYNAMIC BINDER LINKERS (The Missing Mounting Fix)
+TARGET_RECOVERY_DEVICE_MODULES += ashmemd_aidl_interface-cpp libashmemd_client
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libashmemd_client.so 
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/ashmemd_aidl_interface-cpp.so
+TARGET_RECOVERY_LINK_SHARED_LIBS_FROM_RECOVERY_ALLOWED := true
+
+# 7. ENCRYPTION AND DECRYPTION MAPPING ENGINE (Solves 0MB / Mount Fails)
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+RECOVERY_SDCARD_ON_DATA := true
+
+# 8. ZIP INSTALLER AND FLASH TOOL ENGINE
+TARGET_USES_MKE2FS := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_REPACKTOOLS := true
+TW_SKIP_COMPATIBILITY_CHECK := true
+TARGET_OTA_ASSERT_DEVICE := RMP2102,RMP2103,RMP6768,RE54C1L1
+
+# 9. USB AND MTP STACK ROUTING
 TW_EXCLUDE_DEFAULT_USB_INIT := false
 
+# 10. ORANGEFOX EXCLUSIVE FLAG COMPATIBILITY
+OF_MAINTAINER := "Awesome_Gaming"
+OF_DEVICE_WITHOUT_KEYMASTER := 1
+TW_EXCLUDE_TWRPAPP := true
